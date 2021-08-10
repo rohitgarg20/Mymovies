@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
 })
 
 const propsAreEqual = (prevProps, currentProps) => {
-  log('propsAreEqualpropsAreEqual', prevProps, currentProps)
+  log('propsAreEqualpropsAreEqual', prevProps, currentProps, prevProps.onPressMovieItem === currentProps.onPressMovieItem)
   return true
 }
 
-export const movieItemComponent = memo((props: IProps) => {
+const movieItemComponent = (props: IProps) => {
 
   const onPressItem = () => {
     const { onPressMovieItem, imdbID }  = props
@@ -34,7 +34,7 @@ export const movieItemComponent = memo((props: IProps) => {
   }
 
 
-
+  log('renderMovieItemrenderMovieItem is called')
   const renderMovieItem = () => {
     const { title, imdbID, poster, onPressMovieItem } = props
     return (
@@ -59,10 +59,12 @@ export const movieItemComponent = memo((props: IProps) => {
       {renderMovieItem()}
     </>
   )
-})
+}
+
+const MovieItemComponent = memo(movieItemComponent)
 
 export {
-  movieItemComponent as MovieItemComponent
+  MovieItemComponent
 }
 
 

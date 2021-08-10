@@ -11,16 +11,17 @@ const styles = StyleSheet.create({
     }
 });
 const propsAreEqual = (prevProps, currentProps) => {
-    log('propsAreEqualpropsAreEqual', prevProps, currentProps);
+    log('propsAreEqualpropsAreEqual', prevProps, currentProps, prevProps.onPressMovieItem === currentProps.onPressMovieItem);
     return true;
 };
-export const movieItemComponent = memo((props) => {
+const movieItemComponent = (props) => {
     const onPressItem = () => {
         const { onPressMovieItem, imdbID } = props;
         if (onPressMovieItem) {
             onPressMovieItem(imdbID);
         }
     };
+    log('renderMovieItemrenderMovieItem is called');
     const renderMovieItem = () => {
         const { title, imdbID, poster, onPressMovieItem } = props;
         return (React.createElement(TouchableOpacity, { style: {
@@ -35,5 +36,6 @@ export const movieItemComponent = memo((props) => {
             React.createElement(CustomText, { textStyle: styles.movieTitle }, title)));
     };
     return (React.createElement(React.Fragment, null, renderMovieItem()));
-});
-export { movieItemComponent as MovieItemComponent };
+};
+const MovieItemComponent = memo(movieItemComponent);
+export { MovieItemComponent };
